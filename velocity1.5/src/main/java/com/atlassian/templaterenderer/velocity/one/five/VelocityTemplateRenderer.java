@@ -17,6 +17,8 @@ import com.atlassian.plugin.webresource.WebResourceManager;
 import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.templaterenderer.RenderingException;
 import com.atlassian.templaterenderer.TemplateRenderer;
+import com.atlassian.templaterenderer.velocity.HtmlSafeDirective;
+import com.atlassian.templaterenderer.velocity.introspection.TemplateRendererAnnotationBoxingUberspect;
 
 public class VelocityTemplateRenderer implements TemplateRenderer
 {
@@ -36,7 +38,8 @@ public class VelocityTemplateRenderer implements TemplateRenderer
         velocity.addProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogLogSystem.class.getName());
         velocity.addProperty(Velocity.RESOURCE_LOADER, "classpath");
         velocity.addProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-        velocity.addProperty("velocimacro.library", "macros.vm");
+        velocity.addProperty("runtime.introspector.uberspect", TemplateRendererAnnotationBoxingUberspect.class.getName());
+        velocity.addProperty("userdirective", HtmlSafeDirective.class.getName());
         for (Map.Entry<String, String> prop : properties.entrySet())
         {
             velocity.addProperty(prop.getKey(), prop.getValue());
