@@ -1,6 +1,7 @@
 package com.atlassian.templaterenderer.velocity.one.five;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.Map;
@@ -73,7 +74,7 @@ public class VelocityTemplateRenderer implements TemplateRenderer
         try
         {
             Template template = velocity.getTemplate(templateName);
-            template.merge(createContext(context, writer), writer);
+            template.merge(createContext(context), writer);
             writer.flush();
         }
         catch (IOException e)
@@ -90,13 +91,31 @@ public class VelocityTemplateRenderer implements TemplateRenderer
         }
     }
     
-    private VelocityContext createContext(Map<String, Object> contextParams, Writer writer)
+    public String renderFragment(String fragment, Map<String, Object> context) throws IOException
+    {
+        try
+        {
+            StringWriter tempWriter = new StringWriter(fragment.length());
+            velocity.evaluate(createContext(context), tempWriter, "renderFragment", fragment);
+            return tempWriter.toString();
+        }
+        catch (IOException e)
+        {
+            throw e;
+        }
+        catch (Exception e)
+        {
+            throw new RenderingException(e);
+        }
+
+    }
+    
+    private VelocityContext createContext(Map<String, Object> contextParams)
     {
         VelocityContext context = new VelocityContext();
         context.put("i18n", i18n);
         context.put("webResourceManager", webResourceManager);
         context.put("esc", new EscapeTool());
-        context.put("writer", writer);
         for (Map.Entry<String, Object> entry : contextParams.entrySet())
         {
             context.put(entry.getKey(), entry.getValue());

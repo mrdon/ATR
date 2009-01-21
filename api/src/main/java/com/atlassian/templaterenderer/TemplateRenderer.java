@@ -11,4 +11,6 @@ public interface TemplateRenderer
 
     void render(String templateName, Map<String, Object> context, Writer writer)
             throws RenderingException, IOException;
+
+    String renderFragment(String fragment, Map<String, Object> context) throws IOException;
 }
