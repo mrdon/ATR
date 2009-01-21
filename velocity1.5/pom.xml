@@ -8,6 +8,9 @@
     <artifactId>atlassian-template-renderer-velocity1.5-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.5 Plugin</name>
     <packaging>jar</packaging>
+    <properties>
+        <atlassian.plugin.key>com.atlassian.templaterenderer.atlassian-template-renderer-velocity1.5-plugin</atlassian.plugin.key>
+    </properties>
     <build>
         <plugins>
             <plugin>
