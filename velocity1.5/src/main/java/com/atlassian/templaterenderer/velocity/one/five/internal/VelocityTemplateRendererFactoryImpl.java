@@ -1,4 +1,4 @@
-package com.atlassian.templaterenderer.velocity.one.five;
+package com.atlassian.templaterenderer.velocity.one.five.internal;
 
 import java.util.Collections;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.Map;
 import com.atlassian.plugin.webresource.WebResourceManager;
 import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.templaterenderer.TemplateRenderer;
+import com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRendererFactory;
 
 public class VelocityTemplateRendererFactoryImpl implements VelocityTemplateRendererFactory
 {

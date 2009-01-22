@@ -15,7 +15,7 @@
     <!-- SAL components -->
     <component-import key="i18nResolver" interface="com.atlassian.sal.api.message.I18nResolver"/>
 
-    <component key="velocity-1.5-template-renderer-factory" class="com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRendererFactoryImpl" public="true">
+    <component key="velocity-1.5-template-renderer-factory" class="com.atlassian.templaterenderer.velocity.one.internal.five.VelocityTemplateRendererFactoryImpl" public="true">
         <interface>com.atlassian.templaterenderer.TemplateRendererFactory</interface>
         <interface>com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRendererFactory</interface>
     </component>
