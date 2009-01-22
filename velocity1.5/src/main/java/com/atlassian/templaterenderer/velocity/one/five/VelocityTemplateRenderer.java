@@ -91,17 +91,13 @@ public class VelocityTemplateRenderer implements TemplateRenderer
         }
     }
     
-    public String renderFragment(String fragment, Map<String, Object> context) throws IOException
+    public String renderFragment(String fragment, Map<String, Object> context)
     {
         try
         {
             StringWriter tempWriter = new StringWriter(fragment.length());
             velocity.evaluate(createContext(context), tempWriter, "renderFragment", fragment);
             return tempWriter.toString();
-        }
-        catch (IOException e)
-        {
-            throw e;
         }
         catch (Exception e)
         {
