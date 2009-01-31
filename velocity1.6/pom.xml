@@ -5,11 +5,11 @@
         <artifactId>atlassian-template-renderer</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>atlassian-template-renderer-velocity1.5-plugin</artifactId>
-    <name>Atlassian Template Renderer Velocity 1.5 Plugin</name>
+    <artifactId>atlassian-template-renderer-velocity1.6-plugin</artifactId>
+    <name>Atlassian Template Renderer Velocity 1.6 Plugin</name>
     <packaging>jar</packaging>
     <properties>
-        <atlassian.plugin.key>com.atlassian.templaterenderer.atlassian-template-renderer-velocity1.5-plugin</atlassian.plugin.key>
+        <atlassian.plugin.key>com.atlassian.templaterenderer.atlassian-template-renderer-velocity1.6-plugin</atlassian.plugin.key>
     </properties>
     <build>
         <plugins>
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
-            <version>1.5</version>
+            <version>1.6.1</version>
         </dependency>
         <dependency>
             <groupId>${pom.groupId}</groupId>

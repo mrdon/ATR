@@ -48,7 +48,7 @@ public class AnnotationBoxingUberspect extends UberspectImpl implements RuntimeS
         }
     };
 
-    public void init()
+    public void init() throws Exception
     {
         super.init();
 

@@ -7,9 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.velocity.tools.generic.EscapeTool;
-
 import com.atlassian.templaterenderer.velocity.introspection.MethodAnnotator;
 
 /**
@@ -25,8 +22,6 @@ public final class HtmlSafeClassAnnotator implements MethodAnnotator
     private static final Map<String, String> HTML_ENCODE_CLASS_METHODS = new HashMap<String, String>() {{
         put("com.opensymphony.util.TextUtils", "htmlEncode"); 
         put("com.opensymphony.webwork.util.VelocityWebWorkUtil.VelocityWebWorkUtil", "htmlEncode");
-        put(EscapeTool.class.getName(), "html");
-        put(StringEscapeUtils.class.getName(), "escapeHtml");
     }};
 
     public Collection<Annotation> getAnnotationsForMethod(Method method)

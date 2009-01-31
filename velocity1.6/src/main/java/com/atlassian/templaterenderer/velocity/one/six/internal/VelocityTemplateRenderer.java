@@ -1,4 +1,4 @@
-package com.atlassian.templaterenderer.velocity.one.five.internal;
+package com.atlassian.templaterenderer.velocity.one.six.internal;
 
 import java.io.IOException;
 import java.io.StringWriter;
