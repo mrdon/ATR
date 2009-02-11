@@ -1,24 +1,24 @@
 package com.atlassian.templaterenderer.velocity.one.five.internal;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Collections;
-import java.util.Map;
-
+import com.atlassian.plugin.webresource.WebResourceManager;
+import com.atlassian.sal.api.message.I18nResolver;
+import com.atlassian.templaterenderer.RenderingException;
+import com.atlassian.templaterenderer.TemplateRenderer;
+import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
+import com.atlassian.templaterenderer.velocity.HtmlSafeDirective;
+import com.atlassian.templaterenderer.velocity.introspection.TemplateRendererAnnotationBoxingUberspect;
+import com.atlassian.templaterenderer.velocity.log.CommonsLogChute;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-import com.atlassian.plugin.webresource.WebResourceManager;
-import com.atlassian.sal.api.message.I18nResolver;
-import com.atlassian.templaterenderer.RenderingException;
-import com.atlassian.templaterenderer.TemplateRenderer;
-import com.atlassian.templaterenderer.velocity.HtmlSafeDirective;
-import com.atlassian.templaterenderer.velocity.introspection.TemplateRendererAnnotationBoxingUberspect;
-import com.atlassian.templaterenderer.velocity.log.CommonsLogChute;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Collections;
+import java.util.Map;
 
 public class VelocityTemplateRenderer implements TemplateRenderer
 {
@@ -45,8 +45,12 @@ public class VelocityTemplateRenderer implements TemplateRenderer
             velocity.addProperty(prop.getKey(), prop.getValue());
         }
         
-        ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
-        Thread.currentThread().setContextClassLoader(classLoader);
+        final ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
+        // Don't use the composite class loader here since it is a OSGIBundleDelegatingClassLoader that actually uses the originating
+        // bundle. Essentially the same as the classLoader passed in.  Using this.getClass.getClassLoader() uses *this* bundles
+        // classloader meaning the right version (the version this bundle depends on) of velocity will be loaded.
+        final CompositeClassLoader compositeClassLoader = new CompositeClassLoader(this.getClass().getClassLoader(), classLoader);
+        Thread.currentThread().setContextClassLoader(compositeClassLoader);
         try
         {
             velocity.init();
