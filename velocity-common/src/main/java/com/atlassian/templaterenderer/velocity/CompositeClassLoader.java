@@ -91,6 +91,7 @@ public class CompositeClassLoader extends ClassLoader
             }
             catch (IOException e)
             {
+                log.debug("Underlying classloader '" + classLoader + "' threw IOException", e);
                 ioe = e;
             }
         }
