@@ -46,7 +46,7 @@ public class VelocityTemplateRenderer implements TemplateRenderer
         }
         
         final ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
-        // Don't use the composite class loader here since it is a OSGIBundleDelegatingClassLoader that actually uses the originating
+        // Don't use the context class loader here since it is a OSGIBundleDelegatingClassLoader that actually uses the originating
         // bundle. Essentially the same as the classLoader passed in.  Using this.getClass.getClassLoader() uses *this* bundles
         // classloader meaning the right version (the version this bundle depends on) of velocity will be loaded.
         final CompositeClassLoader compositeClassLoader = new CompositeClassLoader(this.getClass().getClassLoader(), classLoader);
