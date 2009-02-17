@@ -36,14 +36,19 @@ public class CommonsLogChute implements LogChute
         {
             case LogChute.DEBUG_ID:
                 log.debug(message);
+                break;
             case LogChute.ERROR_ID:
                 log.error(message);
+                break;
             case LogChute.INFO_ID:
                 log.info(message);
+                break;
             case LogChute.TRACE_ID:
                 log.trace(message);
+                break;
             case LogChute.WARN_ID:
                 log.warn(message);
+                break;
         }
     }
 
@@ -53,14 +58,19 @@ public class CommonsLogChute implements LogChute
         {
             case LogChute.DEBUG_ID:
                 log.debug(message, cause);
+                break;
             case LogChute.ERROR_ID:
                 log.error(message, cause);
+                break;
             case LogChute.INFO_ID:
                 log.info(message, cause);
+                break;
             case LogChute.TRACE_ID:
                 log.trace(message, cause);
+                break;
             case LogChute.WARN_ID:
                 log.warn(message, cause);
+                break;
         }
     }
 }

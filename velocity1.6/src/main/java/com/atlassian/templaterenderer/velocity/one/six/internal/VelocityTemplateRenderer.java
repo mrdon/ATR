@@ -7,7 +7,7 @@ import com.atlassian.templaterenderer.TemplateRenderer;
 import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
 import com.atlassian.templaterenderer.velocity.HtmlSafeDirective;
 import com.atlassian.templaterenderer.velocity.introspection.TemplateRendererAnnotationBoxingUberspect;
-import com.atlassian.templaterenderer.velocity.log.CommonsLogChute;
+import org.apache.velocity.runtime.log.CommonsLogLogChute;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -35,7 +35,7 @@ public class VelocityTemplateRenderer implements TemplateRenderer
         this.webResourceManager = webResourceManager;
         
         velocity = new VelocityEngine();
-        velocity.addProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogChute.class.getName());
+        velocity.addProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogLogChute.class.getName());
         velocity.addProperty(Velocity.RESOURCE_LOADER, "classpath");
         velocity.addProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocity.addProperty("runtime.introspector.uberspect", TemplateRendererAnnotationBoxingUberspect.class.getName());
