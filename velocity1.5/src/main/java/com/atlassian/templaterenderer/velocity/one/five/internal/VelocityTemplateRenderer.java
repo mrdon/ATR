@@ -120,4 +120,12 @@ public class VelocityTemplateRenderer implements TemplateRenderer
         }
         return context;
     }
+
+    /**
+     * Check whether the given template exists or not
+     */
+    public boolean resolve(String templateName)
+    {
+        return classLoader.getResource(templateName) != null;
+    }
 }

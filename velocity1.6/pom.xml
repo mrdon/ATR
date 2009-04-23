@@ -50,7 +50,18 @@
             <artifactId>atlassian-template-renderer-velocity-common</artifactId>
             <version>${pom.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${pom.groupId}</groupId>
+            <artifactId>atlassian-template-renderer-common</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
         <!-- Provided, non-bundled dependencies -->
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>1.2.0</version>
+            <scope>provided</scope>          
+        </dependency>
         <dependency>
             <groupId>${pom.groupId}</groupId>
             <artifactId>atlassian-template-renderer-api</artifactId>
@@ -59,11 +70,7 @@
         </dependency>
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
-            <artifactId>atlassian-plugins-webresource</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.atlassian.sal</groupId>
-            <artifactId>sal-api</artifactId>
+            <artifactId>atlassian-plugins-osgi</artifactId>
         </dependency>
     </dependencies>
 </project>
