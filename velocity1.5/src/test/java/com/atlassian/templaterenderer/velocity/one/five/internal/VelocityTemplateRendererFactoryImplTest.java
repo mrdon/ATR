@@ -7,30 +7,32 @@ import static org.hamcrest.Matchers.is;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.Mock;
 
-import com.atlassian.plugin.webresource.WebResourceManager;
-import com.atlassian.sal.api.message.I18nResolver;
-import com.atlassian.templaterenderer.TemplateRendererFactory;
+import com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRendererFactory;
+import com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRenderer;
+import com.atlassian.templaterenderer.TemplateContextFactory;
+
+import java.util.Collections;
 
 @RunWith(MockitoJUnitRunner.class)
 public class VelocityTemplateRendererFactoryImplTest
 {
-    @Mock I18nResolver i18n;
-    @Mock WebResourceManager webResourceManager;
-    
-    TemplateRendererFactory rendererFactory;
-    
+    @Mock TemplateContextFactory templateContextFactory;
+    VelocityTemplateRendererFactory rendererFactory;
+
     @Before
     public void setUp()
     {
-        rendererFactory = new VelocityTemplateRendererFactoryImpl(i18n, webResourceManager);
+        rendererFactory = new VelocityTemplateRendererFactoryImpl(templateContextFactory,
+            Thread.currentThread().getContextClassLoader(), "pluginkey");
     }
-    
+
     @Test
     public void assertThatGetInstanceReturnsVelocityTemplateRenderer()
     {
-        assertThat(rendererFactory.getInstance(getClass().getClassLoader()), is(instanceOf(VelocityTemplateRenderer.class)));
+        assertThat(rendererFactory.getInstance(Collections.<String, String>emptyMap()), is(instanceOf(
+            VelocityTemplateRenderer.class)));
     }
 }

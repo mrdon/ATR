@@ -1,4 +1,4 @@
-package com.atlassian.templaterenderer.plugins;
+package com.atlassian.templaterenderer;
 
 import java.util.Map;
 

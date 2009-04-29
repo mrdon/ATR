@@ -11,11 +11,20 @@
         </bundle-instructions>
     </plugin-info>
 
-    <!-- SAL components -->
-    <component-import key="i18nResolver" interface="com.atlassian.sal.api.message.I18nResolver"/>
+    <component-import key="templateContextFactory" interface="com.atlassian.templaterenderer.TemplateContextFactory"/>
 
-    <component key="velocity-1.5-template-renderer-factory" class="com.atlassian.templaterenderer.velocity.one.five.internal.VelocityTemplateRendererFactoryImpl" public="true">
+    <component key="velocity-1.5-template-renderer"
+            class="com.atlassian.templaterenderer.velocity.one.five.internal.VelocityTemplateRendererServiceFactory"
+            public="true">
+        <interface>com.atlassian.templaterenderer.TemplateRenderer</interface>
+        <interface>com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRenderer</interface>
+    </component>
+
+    <component key="velocity-1.5-template-renderer-factory"
+            class="com.atlassian.templaterenderer.velocity.one.five.internal.VelocityTemplateRendererFactoryServiceFactory"
+            public="true">
         <interface>com.atlassian.templaterenderer.TemplateRendererFactory</interface>
         <interface>com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRendererFactory</interface>
     </component>
+
 </atlassian-plugin>

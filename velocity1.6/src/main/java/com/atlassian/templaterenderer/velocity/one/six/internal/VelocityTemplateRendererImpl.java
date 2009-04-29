@@ -1,7 +1,7 @@
 package com.atlassian.templaterenderer.velocity.one.six.internal;
 
 import com.atlassian.templaterenderer.RenderingException;
-import com.atlassian.templaterenderer.plugins.TemplateContextFactory;
+import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
 import com.atlassian.templaterenderer.velocity.HtmlSafeDirective;
 import com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer;

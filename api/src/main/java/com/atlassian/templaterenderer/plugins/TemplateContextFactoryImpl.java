@@ -1,6 +1,7 @@
 package com.atlassian.templaterenderer.plugins;
 
 import com.atlassian.plugin.PluginAccessor;
+import com.atlassian.templaterenderer.TemplateContextFactory;
 
 import java.util.Map;
 import java.util.List;

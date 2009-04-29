@@ -1,12 +1,12 @@
-package com.atlassian.templaterenderer.velocity.one.six.internal;
+package com.atlassian.templaterenderer.velocity.one.five.internal;
 
 import org.osgi.framework.ServiceFactory;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceRegistration;
-import com.atlassian.templaterenderer.BundleClassLoaderAccessor;
 import com.atlassian.templaterenderer.TemplateContextFactory;
-import com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRendererFactory;
+import com.atlassian.templaterenderer.BundleClassLoaderAccessor;
 import com.atlassian.templaterenderer.TemplateRenderer;
+import com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRendererFactory;
 
 import java.util.Map;
 
@@ -36,7 +36,7 @@ public class VelocityTemplateRendererFactoryServiceFactory implements ServiceFac
         String pluginKey = (String) bundle.getHeaders().get(ATLASSIAN_PLUGIN_KEY);
         // We want velocity to use the callers classloader
         ClassLoader bundleClassLoader = BundleClassLoaderAccessor.getClassLoader(bundle);
-        return new VelocityTemplateRendererFactoryImpl(templateContextFactory, pluginKey, bundleClassLoader);
+        return new VelocityTemplateRendererFactoryImpl(templateContextFactory, bundleClassLoader, pluginKey);
     }
 
     public void ungetService(Bundle bundle, ServiceRegistration serviceRegistration, Object o)

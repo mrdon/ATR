@@ -1,11 +1,10 @@
 package com.atlassian.templaterenderer.velocity.one.five.internal;
 
-import com.atlassian.plugin.webresource.WebResourceManager;
-import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.templaterenderer.RenderingException;
-import com.atlassian.templaterenderer.TemplateRenderer;
+import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
 import com.atlassian.templaterenderer.velocity.HtmlSafeDirective;
+import com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRenderer;
 import com.atlassian.templaterenderer.velocity.introspection.TemplateRendererAnnotationBoxingUberspect;
 import com.atlassian.templaterenderer.velocity.log.CommonsLogChute;
 import org.apache.velocity.Template;
@@ -20,20 +19,20 @@ import java.io.Writer;
 import java.util.Collections;
 import java.util.Map;
 
-public class VelocityTemplateRenderer implements TemplateRenderer
+public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
 {
+    private final TemplateContextFactory templateContextFactory;
     private final ClassLoader classLoader;
-    private final I18nResolver i18n;
-    private final WebResourceManager webResourceManager;
+    private final String pluginKey;
 
     private final VelocityEngine velocity;
 
-    public VelocityTemplateRenderer(ClassLoader classLoader, I18nResolver i18n, WebResourceManager webResourceManager, Map<String, String> properties)
+    public VelocityTemplateRendererImpl(TemplateContextFactory templateContextFactory, ClassLoader classLoader, String pluginKey, Map<String, String> properties)
     {
+        this.templateContextFactory = templateContextFactory;
         this.classLoader = classLoader;
-        this.i18n = i18n;
-        this.webResourceManager = webResourceManager;
-        
+        this.pluginKey = pluginKey;
+
         velocity = new VelocityEngine();
         velocity.addProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogChute.class.getName());
         velocity.addProperty(Velocity.RESOURCE_LOADER, "classpath");
@@ -64,7 +63,7 @@ public class VelocityTemplateRenderer implements TemplateRenderer
             Thread.currentThread().setContextClassLoader(originalClassLoader);
         }
     }
-    
+
     public void render(String templateName, Writer writer) throws RenderingException, IOException
     {
         render(templateName, Collections.<String, Object>emptyMap(), writer);
@@ -111,14 +110,7 @@ public class VelocityTemplateRenderer implements TemplateRenderer
     
     private VelocityContext createContext(Map<String, Object> contextParams)
     {
-        VelocityContext context = new VelocityContext();
-        context.put("i18n", i18n);
-        context.put("webResourceManager", webResourceManager);
-        for (Map.Entry<String, Object> entry : contextParams.entrySet())
-        {
-            context.put(entry.getKey(), entry.getValue());
-        }
-        return context;
+        return new VelocityContext(templateContextFactory.createContext(pluginKey, contextParams));
     }
 
     /**

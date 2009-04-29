@@ -50,11 +50,6 @@
             <artifactId>atlassian-template-renderer-velocity-common</artifactId>
             <version>${pom.version}</version>
         </dependency>
-        <dependency>
-            <groupId>${pom.groupId}</groupId>
-            <artifactId>atlassian-template-renderer-common</artifactId>
-            <version>${pom.version}</version>
-        </dependency>
         <!-- Provided, non-bundled dependencies -->
         <dependency>
             <groupId>org.apache.felix</groupId>

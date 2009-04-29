@@ -1,4 +1,4 @@
-package com.atlassian.templaterenderer.plugins;
+package com.atlassian.templaterenderer;
 
 import org.osgi.framework.Bundle;
 import org.apache.commons.lang.Validate;

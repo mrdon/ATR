@@ -1,17 +1,18 @@
-package com.atlassian.templaterenderer.velocity.one.six.internal;
+package com.atlassian.templaterenderer.velocity.one.five.internal;
 
-import org.osgi.framework.ServiceFactory;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.ServiceRegistration;
-import com.atlassian.templaterenderer.BundleClassLoaderAccessor;
 import com.atlassian.templaterenderer.TemplateContextFactory;
+import com.atlassian.templaterenderer.BundleClassLoaderAccessor;
 import com.atlassian.templaterenderer.RenderingException;
-import com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer;
+import com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRenderer;
 
 import java.util.Collections;
 import java.util.Map;
-import java.io.IOException;
 import java.io.Writer;
+import java.io.IOException;
+
+import org.osgi.framework.ServiceRegistration;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.ServiceFactory;
 
 /**
  * Service factory for instantiating a template renderer for the given bundle
@@ -39,8 +40,7 @@ public class VelocityTemplateRendererServiceFactory implements ServiceFactory, V
         String pluginKey = (String) bundle.getHeaders().get(ATLASSIAN_PLUGIN_KEY);
         // We want velocity to use the callers classloader
         ClassLoader bundleClassLoader = BundleClassLoaderAccessor.getClassLoader(bundle);
-        return new VelocityTemplateRendererImpl(bundleClassLoader, pluginKey, Collections.<String, String>emptyMap(),
-            templateContextFactory);
+        return new VelocityTemplateRendererImpl(templateContextFactory, bundleClassLoader, pluginKey, Collections.<String, String>emptyMap());
     }
 
     public void ungetService(Bundle bundle, ServiceRegistration serviceRegistration, Object service)

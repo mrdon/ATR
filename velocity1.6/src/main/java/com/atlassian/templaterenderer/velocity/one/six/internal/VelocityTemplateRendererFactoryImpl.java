@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import com.atlassian.templaterenderer.TemplateRenderer;
-import com.atlassian.templaterenderer.plugins.TemplateContextFactory;
+import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRendererFactory;
 
 /**
