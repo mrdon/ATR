@@ -4,19 +4,24 @@ import com.atlassian.plugin.descriptors.AbstractModuleDescriptor;
 import com.atlassian.plugin.Plugin;
 import com.atlassian.plugin.PluginParseException;
 import com.atlassian.plugin.StateAware;
+import com.atlassian.plugin.osgi.factory.OsgiPlugin;
 import com.atlassian.plugin.hostcontainer.HostContainer;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationContext;
 import org.dom4j.Element;
 import org.dom4j.Attribute;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.framework.InvalidSyntaxException;
+import org.apache.log4j.Logger;
 
 /**
  * Module descriptor for template context items.  These may either be a class that gets instantiated on each lookup, or
  * they may reference a component using component-ref.
  */
 public class TemplateContextItemModuleDescriptor extends AbstractModuleDescriptor<Object> implements
-    ApplicationContextAware, StateAware
+    StateAware
 {
+    private Logger log = Logger.getLogger(TemplateContextItemModuleDescriptor.class);
     private boolean global = false;
     private String contextKey;
     private String componentRef = null;
@@ -60,36 +65,53 @@ public class TemplateContextItemModuleDescriptor extends AbstractModuleDescripto
         }
     }
 
-    public Object getModule()
+    public synchronized Object getModule()
     {
         // We don't cache componentRefs, because if the user wants to use a prototype component, then
         // caching it would undermine that.  It's just a hash map lookup anyway.
         if (componentRef != null)
         {
+            // Get the bundles applicationContext
+            if (applicationContext == null)
+            {
+                OsgiPlugin osgiPlugin = (OsgiPlugin) getPlugin();
+                BundleContext bundleContext = osgiPlugin.getBundle().getBundleContext();
+                try
+                {
+                    // Read chapter 4 of the Spring DM guide to understand what on earth is going on here
+                    ServiceReference[] srs = bundleContext.getServiceReferences(ApplicationContext.class.getName(),
+                        "(org.springframework.context.service.name=" + osgiPlugin.getBundle().getSymbolicName() + ")");
+                    if (srs.length != 1)
+                    {
+                        log.error(
+                            "Spring DM is being evil, there is not exactly one ApplicationContext for the bundle " +
+                                osgiPlugin.getBundle().getSymbolicName() + ", there are " + srs.length);
+                    }
+                    applicationContext = (ApplicationContext) bundleContext.getService(srs[0]);
+                }
+                catch (InvalidSyntaxException ise)
+                {
+                    log.error("Bad filter", ise);
+                }
+            }
             return applicationContext.getBean(componentRef);
         }
         else
         {
-            synchronized (this)
+            if (component == null)
             {
-                if (component == null)
-                {
-                    component = hostContainer.create(getModuleClass());
-                }
-                return component;
+                component = hostContainer.create(getModuleClass());
             }
+            return component;
         }
+
     }
 
     @Override public synchronized void disabled()
     {
         super.disabled();
         component = null;
-    }
-
-    public void setApplicationContext(ApplicationContext applicationContext)
-    {
-        this.applicationContext = applicationContext;
+        applicationContext = null;
     }
 
     public boolean isGlobal()
