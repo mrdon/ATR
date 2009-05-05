@@ -31,6 +31,7 @@ public class TemplateContextFactoryImpl implements TemplateContextFactory
     public Map<String, Object> createContext(String pluginKey, Map<String, Object> contextParams)
     {
         Map<String, Object> context = new HashMap<String, Object>();
+        context.put("context", context);
         List<TemplateContextItemModuleDescriptor> templateContextItemPlugins =
             pluginAccessor.getEnabledModuleDescriptorsByClass(TemplateContextItemModuleDescriptor.class);
         for (TemplateContextItemModuleDescriptor desc : templateContextItemPlugins)
