@@ -4,9 +4,10 @@ import com.atlassian.plugin.descriptors.AbstractModuleDescriptor;
 import com.atlassian.plugin.Plugin;
 import com.atlassian.plugin.PluginParseException;
 import com.atlassian.plugin.StateAware;
+import com.atlassian.plugin.AutowireCapablePlugin;
 import com.atlassian.plugin.osgi.factory.OsgiPlugin;
-import com.atlassian.plugin.hostcontainer.HostContainer;
 import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.dom4j.Element;
 import org.dom4j.Attribute;
 import org.osgi.framework.BundleContext;
@@ -27,13 +28,7 @@ public class TemplateContextItemModuleDescriptor extends AbstractModuleDescripto
     private String componentRef = null;
     private Object component = null;
 
-    private final HostContainer hostContainer;
     private ApplicationContext applicationContext;
-
-    public TemplateContextItemModuleDescriptor(HostContainer hostContainer)
-    {
-        this.hostContainer = hostContainer;
-    }
 
     @Override public void init(Plugin plugin, Element element) throws PluginParseException
     {
@@ -71,40 +66,44 @@ public class TemplateContextItemModuleDescriptor extends AbstractModuleDescripto
         // caching it would undermine that.  It's just a hash map lookup anyway.
         if (componentRef != null)
         {
-            // Get the bundles applicationContext
-            if (applicationContext == null)
-            {
-                OsgiPlugin osgiPlugin = (OsgiPlugin) getPlugin();
-                BundleContext bundleContext = osgiPlugin.getBundle().getBundleContext();
-                try
-                {
-                    // Read chapter 4 of the Spring DM guide to understand what on earth is going on here
-                    ServiceReference[] srs = bundleContext.getServiceReferences(ApplicationContext.class.getName(),
-                        "(org.springframework.context.service.name=" + osgiPlugin.getBundle().getSymbolicName() + ")");
-                    if (srs.length != 1)
-                    {
-                        log.error(
-                            "Spring DM is being evil, there is not exactly one ApplicationContext for the bundle " +
-                                osgiPlugin.getBundle().getSymbolicName() + ", there are " + srs.length);
-                    }
-                    applicationContext = (ApplicationContext) bundleContext.getService(srs[0]);
-                }
-                catch (InvalidSyntaxException ise)
-                {
-                    log.error("Bad filter", ise);
-                }
-            }
-            return applicationContext.getBean(componentRef);
+            return getApplicationContext().getBean(componentRef);
         }
         else
         {
             if (component == null)
             {
-                component = hostContainer.create(getModuleClass());
+                component = ((AutowireCapablePlugin) getPlugin()).autowire(getModuleClass());
             }
             return component;
         }
+    }
 
+    private ApplicationContext getApplicationContext()
+    {
+        // Get the bundles applicationContext
+        if (applicationContext == null)
+        {
+            OsgiPlugin osgiPlugin = (OsgiPlugin) getPlugin();
+            BundleContext bundleContext = osgiPlugin.getBundle().getBundleContext();
+            try
+            {
+                // Read chapter 4 of the Spring DM guide to understand what on earth is going on here
+                ServiceReference[] srs = bundleContext.getServiceReferences(ApplicationContext.class.getName(),
+                    "(org.springframework.context.service.name=" + osgiPlugin.getBundle().getSymbolicName() + ")");
+                if (srs.length != 1)
+                {
+                    log.error(
+                        "Spring DM is being evil, there is not exactly one ApplicationContext for the bundle " +
+                            osgiPlugin.getBundle().getSymbolicName() + ", there are " + srs.length);
+                }
+                applicationContext = (ApplicationContext) bundleContext.getService(srs[0]);
+            }
+            catch (InvalidSyntaxException ise)
+            {
+                log.error("Bad filter", ise);
+            }
+        }
+        return applicationContext;
     }
 
     @Override public synchronized void disabled()
