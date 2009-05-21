@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.atlassian.templaterenderer</groupId>
         <artifactId>atlassian-template-renderer</artifactId>
-        <version>1.0.0.beta5</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>atlassian-template-renderer-velocity1.5-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.5 Plugin</name>
