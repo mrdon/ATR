@@ -10,6 +10,7 @@ import org.apache.velocity.context.InternalWrapperContext;
 import org.apache.velocity.util.ContextAware;
 
 import com.atlassian.templaterenderer.velocity.introspection.AnnotatedReferenceHandler;
+import com.atlassian.templaterenderer.annotations.HtmlSafe;
 
 /**
  * <p>Reference insertion handler to be used before the {@link HtmlAnnotationEscaper}.

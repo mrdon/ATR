@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
-import com.atlassian.templaterenderer.velocity.annotations.ReturnValueAnnotation;
+import com.atlassian.templaterenderer.annotations.ReturnValueAnnotation;
 
 /**
  * A method annotator that returns all annotations that have been meta annotated as a {@link ReturnValueAnnotation}

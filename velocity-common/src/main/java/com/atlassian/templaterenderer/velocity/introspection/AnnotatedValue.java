@@ -7,7 +7,7 @@ import java.util.HashSet;
 
 import org.apache.commons.lang.Validate;
 
-import com.atlassian.templaterenderer.velocity.annotations.CollectionInheritable;
+import com.atlassian.templaterenderer.annotations.CollectionInheritable;
 
 /**
  * An annotated value associates a collection of annotations with a value.

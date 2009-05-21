@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import com.atlassian.templaterenderer.velocity.introspection.AnnotationBoxedElement;
+import com.atlassian.templaterenderer.annotations.HtmlSafe;
 
 /**
  * Utilities for working with the {@link HtmlSafe} annotation

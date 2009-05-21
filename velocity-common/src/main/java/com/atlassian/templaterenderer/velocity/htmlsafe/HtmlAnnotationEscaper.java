@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.commons.lang.StringEscapeUtils;
 
 import com.atlassian.templaterenderer.velocity.introspection.AnnotatedReferenceHandler;
+import com.atlassian.templaterenderer.annotations.HtmlSafe;
 
 /**
  * A {@link org.apache.velocity.app.event.ReferenceInsertionEventHandler} that HTML encodes any value not annotated

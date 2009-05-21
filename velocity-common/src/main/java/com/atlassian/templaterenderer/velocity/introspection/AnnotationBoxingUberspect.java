@@ -20,7 +20,7 @@ import org.apache.velocity.util.introspection.UberspectImpl;
 import org.apache.velocity.util.introspection.VelMethod;
 import org.apache.velocity.util.introspection.VelPropertyGet;
 
-import com.atlassian.templaterenderer.velocity.annotations.ReturnValueAnnotation;
+import com.atlassian.templaterenderer.annotations.ReturnValueAnnotation;
 
 /**
  * A Velocity uberspect that boxes return values in an annotated form and unboxes them again when used as arguments

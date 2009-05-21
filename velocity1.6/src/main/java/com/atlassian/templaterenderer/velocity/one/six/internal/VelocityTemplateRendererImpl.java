@@ -4,6 +4,7 @@ import com.atlassian.templaterenderer.RenderingException;
 import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
 import com.atlassian.templaterenderer.velocity.HtmlSafeDirective;
+import com.atlassian.templaterenderer.velocity.htmlsafe.HtmlAnnotationEscaper;
 import com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer;
 import com.atlassian.templaterenderer.velocity.introspection.TemplateRendererAnnotationBoxingUberspect;
 import org.apache.velocity.runtime.log.CommonsLogLogChute;
@@ -44,6 +45,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         velocity.addProperty("runtime.introspector.uberspect",
             TemplateRendererAnnotationBoxingUberspect.class.getName());
         velocity.addProperty("userdirective", HtmlSafeDirective.class.getName());
+        velocity.addProperty("eventhandler.referenceinsertion.class", HtmlAnnotationEscaper.class.getName());
         for (Map.Entry<String, String> prop : properties.entrySet())
         {
             velocity.addProperty(prop.getKey(), prop.getValue());
