@@ -71,5 +71,10 @@
             <groupId>com.atlassian.sal</groupId>
             <artifactId>sal-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

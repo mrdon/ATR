@@ -148,6 +148,11 @@
                 <version>2.5</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>com.google.collections</groupId>
+                <artifactId>google-collections</artifactId>
+                <version>1.0-rc1</version>
+            </dependency>
 
             <!-- Test-only dependencies -->
             <dependency>
@@ -168,12 +173,12 @@
 	            <version>1.1</version>
 	            <scope>test</scope>
 	        </dependency>
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-integration</artifactId>
-                <version>1.1</version>
-                <scope>test</scope>
-            </dependency>
+                <dependency>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-integration</artifactId>
+                    <version>1.1</version>
+                    <scope>test</scope>
+                </dependency>
         </dependencies>
     </dependencyManagement>
 
