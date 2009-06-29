@@ -1,24 +1,25 @@
 package com.atlassian.templaterenderer.velocity.one.five.internal;
 
-import com.atlassian.templaterenderer.RenderingException;
-import com.atlassian.templaterenderer.TemplateContextFactory;
-import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
-import com.atlassian.templaterenderer.velocity.HtmlSafeDirective;
-import com.atlassian.templaterenderer.velocity.htmlsafe.HtmlAnnotationEscaper;
-import com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRenderer;
-import com.atlassian.templaterenderer.velocity.introspection.TemplateRendererAnnotationBoxingUberspect;
-import com.atlassian.templaterenderer.velocity.log.CommonsLogChute;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Collections;
+import java.util.Map;
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Collections;
-import java.util.Map;
+import com.atlassian.templaterenderer.RenderingException;
+import com.atlassian.templaterenderer.TemplateContextFactory;
+import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
+import com.atlassian.templaterenderer.velocity.log.CommonsLogChute;
+import com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRenderer;
+import com.atlassian.velocity.htmlsafe.HtmlAnnotationEscaper;
+import com.atlassian.velocity.htmlsafe.HtmlSafeDirective;
+import com.atlassian.velocity.htmlsafe.introspection.HtmlSafeAnnotationBoxingUberspect;
 
 public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
 {
@@ -38,7 +39,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         velocity.addProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogChute.class.getName());
         velocity.addProperty(Velocity.RESOURCE_LOADER, "classpath");
         velocity.addProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-        velocity.addProperty("runtime.introspector.uberspect", TemplateRendererAnnotationBoxingUberspect.class.getName());
+        velocity.addProperty("runtime.introspector.uberspect", HtmlSafeAnnotationBoxingUberspect.class.getName());
         velocity.addProperty("eventhandler.referenceinsertion.class", HtmlAnnotationEscaper.class.getName());
         velocity.addProperty("userdirective", HtmlSafeDirective.class.getName());
         for (Map.Entry<String, String> prop : properties.entrySet())

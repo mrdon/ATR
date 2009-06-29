@@ -105,6 +105,12 @@
     
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.atlassian.velocity.htmlsafe</groupId>
+                <artifactId>velocity-htmlsafe</artifactId>
+                <version>1.0.rc2</version>
+            </dependency>
+            
             <!-- Provided, non-bundled dependencies -->
             <dependency>
                 <groupId>com.atlassian.plugins</groupId>
@@ -177,6 +183,12 @@
                     <groupId>org.hamcrest</groupId>
                     <artifactId>hamcrest-integration</artifactId>
                     <version>1.1</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-nop</artifactId>
+                    <version>1.5.2</version>
                     <scope>test</scope>
                 </dependency>
         </dependencies>
