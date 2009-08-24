@@ -1,19 +1,19 @@
 package com.atlassian.templaterenderer.plugins;
 
-import com.atlassian.plugin.descriptors.AbstractModuleDescriptor;
+import org.apache.log4j.Logger;
+import org.dom4j.Attribute;
+import org.dom4j.Element;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceReference;
+import org.springframework.context.ApplicationContext;
+
+import com.atlassian.plugin.AutowireCapablePlugin;
 import com.atlassian.plugin.Plugin;
 import com.atlassian.plugin.PluginParseException;
 import com.atlassian.plugin.StateAware;
-import com.atlassian.plugin.AutowireCapablePlugin;
+import com.atlassian.plugin.descriptors.AbstractModuleDescriptor;
 import com.atlassian.plugin.osgi.factory.OsgiPlugin;
-import org.springframework.context.ApplicationContext;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.dom4j.Element;
-import org.dom4j.Attribute;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
-import org.osgi.framework.InvalidSyntaxException;
-import org.apache.log4j.Logger;
 
 /**
  * Module descriptor for template context items.  These may either be a class that gets instantiated on each lookup, or
@@ -60,6 +60,7 @@ public class TemplateContextItemModuleDescriptor extends AbstractModuleDescripto
         }
     }
 
+    @Override
     public synchronized Object getModule()
     {
         // We don't cache componentRefs, because if the user wants to use a prototype component, then

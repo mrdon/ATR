@@ -7,17 +7,30 @@
     </parent>
     <artifactId>atlassian-template-renderer-velocity1.6-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.6 Plugin</name>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <properties>
         <atlassian.plugin.key>com.atlassian.templaterenderer.atlassian-template-renderer-velocity1.6-plugin</atlassian.plugin.key>
+        <Export-Package>
+            com.atlassian.templaterenderer.velocity.one.six;version="${project.version}",
+            org.apache.velocity.*;version="1.6.2"
+        </Export-Package>
+        <Private-Package>com.atlassian.templaterenderer.velocity.*,com.atlassian.velocity.htmlsafe.*</Private-Package>
+        <Import-Package>
+            com.werken.xpath;version="[0.9.4, 1.0.0)";resolution:=optional,
+            javax.servlet.*;version="[2.3.0, 3.0.0)";resolution:=optional,
+            org.apache.commons.collections.*;version="[3.2.0, 4.0.0)",
+            org.apache.commons.lang.*;version="[2.4.0, 3.0.0)",
+            org.apache.commons.logging.*;version="[1.1.0, 2.0.0)";resolution:=optional,
+            org.apache.log.*;version="[1.0.1, 1.0.1]";resolution:=optional,
+            org.apache.log4j;version="[1.2.12, 2.0.0)";resolution:=optional,
+            org.apache.oro.text.perl;version="[2.0.8, 3.0.0)";resolution:=optional,
+            org.apache.tools.ant.*;version="[1.7.0, 2.0.0)";resolution:=optional,
+            org.jdom.*;version="[1.0.0, 2.0.0)";resolution:=optional,
+            *
+        </Import-Package>
+        <Spring-Context>*;timeout:=60</Spring-Context>
     </properties>
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-        </plugins>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -43,7 +56,7 @@
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
-            <version>1.6.1</version>
+            <version>1.6.2</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
