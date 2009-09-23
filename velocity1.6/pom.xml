@@ -5,7 +5,7 @@
         <artifactId>atlassian-template-renderer</artifactId>
         <version>1.0.2-SNAPSHOT</version>
     </parent>
-    <artifactId>atlassian-template-renderer-velocity1.6-plugin</artifactId>
+    <artifactId>atlassian-template-renderer-velocity16-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.6 Plugin</name>
     <packaging>bundle</packaging>
     <properties>
