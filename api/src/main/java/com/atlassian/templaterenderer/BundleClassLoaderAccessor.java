@@ -59,7 +59,7 @@ public class BundleClassLoaderAccessor
 
             // For some reason, getResources() sometimes returns nothing, yet getResource() will return one.  This code
             // handles that strange case
-            if (!e.hasMoreElements())
+            if (e != null && !e.hasMoreElements())
             {
                 final URL resource = findResource(name);
                 if (resource != null)
