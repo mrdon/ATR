@@ -1,0 +1,8 @@
+<html>
+  <head><title>Velocity 1.5 Test</title></head>
+  <body>
+    <ul>
+      <li id="engine">velocity-1.5</li>
+    </ul>
+  </body>
+</html>

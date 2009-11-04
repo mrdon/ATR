@@ -10,6 +10,9 @@
     <component key="velocity-1.5-template-renderer"
             class="com.atlassian.templaterenderer.velocity.one.five.internal.VelocityTemplateRendererServiceFactory"
             public="true">
+        <service-properties>
+            <entry key="engine" value="velocity-1.5" />
+        </service-properties>
         <interface>com.atlassian.templaterenderer.TemplateRenderer</interface>
         <interface>com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRenderer</interface>
     </component>
@@ -17,6 +20,9 @@
     <component key="velocity-1.5-template-renderer-factory"
             class="com.atlassian.templaterenderer.velocity.one.five.internal.VelocityTemplateRendererFactoryServiceFactory"
             public="true">
+        <service-properties>
+            <entry key="engine" value="velocity-1.5" />
+        </service-properties>
         <interface>com.atlassian.templaterenderer.TemplateRendererFactory</interface>
         <interface>com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRendererFactory</interface>
     </component>

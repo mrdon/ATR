@@ -1,0 +1,13 @@
+<html>
+  <head><title>Velocity 1.6 Test</title></head>
+  <body>
+    <ul>
+      <li id="engine">velocity-1.6</li>
+      <li id="set-null-enabled">
+          #set($shouldBeNullEventually = "not null")
+          #set($shouldBeNullEventually = $shouldEvaluateToNull)
+          $shouldBeNullEventually
+      </li>
+    </ul>
+  </body>
+</html>

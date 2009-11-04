@@ -17,6 +17,7 @@ import com.atlassian.templaterenderer.RenderingException;
 import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
 import com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer;
+import com.atlassian.velocity.htmlsafe.HtmlAnnotationEscaper;
 import com.atlassian.velocity.htmlsafe.HtmlSafeDirective;
 import com.atlassian.velocity.htmlsafe.introspection.HtmlSafeAnnotationBoxingUberspect;
 
@@ -31,8 +32,10 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
 
     private final VelocityEngine velocity;
 
-    public VelocityTemplateRendererImpl(ClassLoader classLoader, String pluginKey, Map<String, String> properties,
-        TemplateContextFactory templateContextFactory)
+    public VelocityTemplateRendererImpl(ClassLoader classLoader, 
+            String pluginKey,
+            Map<String, String> properties,
+            TemplateContextFactory templateContextFactory)
     {
         this.classLoader = classLoader;
         this.pluginKey = pluginKey;
@@ -45,7 +48,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         velocity.addProperty("runtime.introspector.uberspect",
             HtmlSafeAnnotationBoxingUberspect.class.getName());
         velocity.addProperty("userdirective", HtmlSafeDirective.class.getName());
-        velocity.addProperty("eventhandler.referenceinsertion.class", TemplateRendererHtmlAnnotationEscaper.class.getName());
+        velocity.addProperty("eventhandler.referenceinsertion.class", HtmlAnnotationEscaper.class.getName());
         for (Map.Entry<String, String> prop : properties.entrySet())
         {
             velocity.addProperty(prop.getKey(), prop.getValue());
@@ -55,8 +58,8 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         // Don't use the context class loader here since it is a OSGIBundleDelegatingClassLoader that actually uses the originating 
         // bundle. Essentially the same as the classLoader passed in.  Using this.getClass.getClassLoader() uses *this* bundles
         // classloader meaning the right version (the version this bundle depends on) of velocity will be loaded.
-        final CompositeClassLoader compositeClassLoader = new CompositeClassLoader(this.getClass().getClassLoader(),
-            classLoader);
+        final CompositeClassLoader compositeClassLoader =
+            new CompositeClassLoader(this.getClass().getClassLoader(), classLoader);
         Thread.currentThread().setContextClassLoader(compositeClassLoader);
         try
         {
