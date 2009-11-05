@@ -22,6 +22,6 @@ public class VelocityOnePointFiveTestServlet extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         response.setContentType("text/html");
-        renderer.render("velocity-1.6.vm", response.getWriter());
+        renderer.render("velocity-1.5.vm", response.getWriter());
     }
 }
