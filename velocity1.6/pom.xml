@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.atlassian.templaterenderer</groupId>
         <artifactId>atlassian-template-renderer</artifactId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
     <artifactId>atlassian-template-renderer-velocity16-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.6 Plugin</name>
@@ -63,11 +63,11 @@
             <artifactId>atlassian-template-renderer-velocity-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- Provided, non-bundled dependencies -->
         <dependency>
             <groupId>com.atlassian.velocity.htmlsafe</groupId>
             <artifactId>velocity-htmlsafe</artifactId>
         </dependency>
-        <!-- Provided, non-bundled dependencies -->
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.osgi.core</artifactId>
