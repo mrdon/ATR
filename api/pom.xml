@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.atlassian.templaterenderer</groupId>
         <artifactId>atlassian-template-renderer</artifactId>
-        <version>1.0.5-SNAPSHOT</version>
+        <version>1.0.5</version>
     </parent>
     <artifactId>atlassian-template-renderer-api</artifactId>
     <name>Atlassian Template Renderer API</name>
