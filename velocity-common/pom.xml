@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.atlassian.templaterenderer</groupId>
         <artifactId>atlassian-template-renderer</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.4-SNAPSHOT</version>
     </parent>
     <artifactId>atlassian-template-renderer-velocity-common</artifactId>
     <name>Atlassian Template Renderer Velocity Common lib</name>
@@ -24,6 +24,10 @@
             <artifactId>atlassian-template-renderer-api</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.velocity.htmlsafe</groupId>
+            <artifactId>velocity-htmlsafe</artifactId>
         </dependency>
     </dependencies>
 </project>

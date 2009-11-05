@@ -4,11 +4,11 @@
     <parent>
         <groupId>com.atlassian.pom</groupId>
         <artifactId>atlassian-closedsource-pom</artifactId>
-        <version>17</version>
+        <version>22</version>
     </parent>
     <groupId>com.atlassian.templaterenderer</groupId>
     <artifactId>atlassian-template-renderer</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
     <name>Atlassian Template Renderer</name>
     <description>API and plugins for easily rendering content from different template engines.</description>
     <packaging>pom</packaging>
@@ -132,7 +132,7 @@
             <dependency>
                 <groupId>com.atlassian.velocity.htmlsafe</groupId>
                 <artifactId>velocity-htmlsafe</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.2</version>
             </dependency>
             
             <!-- Provided, non-bundled dependencies -->
