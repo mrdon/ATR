@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import com.atlassian.templaterenderer.annotations.HtmlSafe;
 import com.atlassian.velocity.htmlsafe.introspection.AnnotationBoxedElement;
+import com.google.common.collect.MapMaker;
 
 /**
  * Utilities for working with the deprecated {@link HtmlSafe} annotation
@@ -15,7 +17,8 @@ import com.atlassian.velocity.htmlsafe.introspection.AnnotationBoxedElement;
 public final class TemplateRendererHtmlSafeAnnotationUtils
 {
     public static final Annotation HTML_SAFE_ANNOTATION = HtmlSafeAnnotationFactory.getHtmlSafeAnnotation();
-    private static final Map<String, Boolean> htmlSafeToStringMethodByClassCache = new ConcurrentHashMap<String, Boolean>(1000);
+    private static final ConcurrentMap<Class<?>, Boolean> htmlSafeToStringMethodByClassCache =
+        new MapMaker().initialCapacity(1000).weakKeys().makeMap();
 
     /**
      * Provides a mechanism for obtaining an instance of the HtmlSafe marker annotation.
@@ -58,8 +61,11 @@ public final class TemplateRendererHtmlSafeAnnotationUtils
     {
         final Class<?> clazz = value.getClass();
 
-        if (htmlSafeToStringMethodByClassCache.containsKey(clazz.getName()))
-            return htmlSafeToStringMethodByClassCache.get(clazz.getName());
+        Boolean cachedAnswer = htmlSafeToStringMethodByClassCache.get(clazz);
+        if (cachedAnswer != null)
+        {
+            return cachedAnswer;
+        }
 
         boolean result;
         try
@@ -71,7 +77,7 @@ public final class TemplateRendererHtmlSafeAnnotationUtils
             // All objects have a toString method
             throw new RuntimeException("Object does not have a toString method");
         }
-        htmlSafeToStringMethodByClassCache.put(clazz.getName(), result);
+        htmlSafeToStringMethodByClassCache.put(clazz, result);
         return result;
     }
 
@@ -98,9 +104,10 @@ public final class TemplateRendererHtmlSafeAnnotationUtils
         for (Annotation annotation : annotations)
         {
             if (annotation.annotationType().equals(annotationType))
+            {
                 return true;
+            }
         }
-
         return false;
     }
 }
