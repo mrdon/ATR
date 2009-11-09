@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import com.atlassian.templaterenderer.annotations.HtmlSafe;
 import com.atlassian.velocity.htmlsafe.introspection.AnnotationBoxedElement;
+import com.google.common.base.Function;
 import com.google.common.collect.MapMaker;
 
 /**
@@ -18,7 +19,7 @@ public final class TemplateRendererHtmlSafeAnnotationUtils
 {
     public static final Annotation HTML_SAFE_ANNOTATION = HtmlSafeAnnotationFactory.getHtmlSafeAnnotation();
     private static final ConcurrentMap<Class<?>, Boolean> htmlSafeToStringMethodByClassCache =
-        new MapMaker().initialCapacity(1000).weakKeys().makeMap();
+        new MapMaker().initialCapacity(1000).weakKeys().makeComputingMap(HasSafeToString.FUNCTION);
 
     /**
      * Provides a mechanism for obtaining an instance of the HtmlSafe marker annotation.
@@ -59,26 +60,7 @@ public final class TemplateRendererHtmlSafeAnnotationUtils
      */
     public static boolean hasHtmlSafeToStringMethod(Object value)
     {
-        final Class<?> clazz = value.getClass();
-
-        Boolean cachedAnswer = htmlSafeToStringMethodByClassCache.get(clazz);
-        if (cachedAnswer != null)
-        {
-            return cachedAnswer;
-        }
-
-        boolean result;
-        try
-        {
-            result = clazz.getMethod("toString").isAnnotationPresent(HtmlSafe.class);
-        }
-        catch (NoSuchMethodException e)
-        {
-            // All objects have a toString method
-            throw new RuntimeException("Object does not have a toString method");
-        }
-        htmlSafeToStringMethodByClassCache.put(clazz, result);
-        return result;
+        return htmlSafeToStringMethodByClassCache.get(value.getClass());
     }
 
     /**
@@ -109,5 +91,23 @@ public final class TemplateRendererHtmlSafeAnnotationUtils
             }
         }
         return false;
+    }
+    
+    private static enum HasSafeToString implements Function<Class<?>, Boolean>
+    {
+        FUNCTION;
+            
+        public Boolean apply(Class<?> clazz)
+        {
+            try
+            {
+                return clazz.getMethod("toString").isAnnotationPresent(HtmlSafe.class);
+            }
+            catch (NoSuchMethodException e)
+            {
+                // All objects have a toString method
+                throw new RuntimeException("Object does not have a toString method");
+            }
+        }
     }
 }
