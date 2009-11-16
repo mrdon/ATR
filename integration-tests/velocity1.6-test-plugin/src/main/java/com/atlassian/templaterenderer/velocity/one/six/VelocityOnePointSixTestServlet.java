@@ -11,7 +11,7 @@ import com.atlassian.templaterenderer.TemplateRenderer;
 
 public class VelocityOnePointSixTestServlet extends HttpServlet
 {
-    private TemplateRenderer renderer;
+    private final TemplateRenderer renderer;
 
     public VelocityOnePointSixTestServlet(TemplateRenderer renderer)
     {
