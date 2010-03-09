@@ -130,13 +130,12 @@
     
     <dependencyManagement>
         <dependencies>
-            <!-- Provided, non-bundled dependencies -->
             <dependency>
                 <groupId>com.atlassian.velocity.htmlsafe</groupId>
                 <artifactId>velocity-htmlsafe</artifactId>
                 <version>1.1.beta1</version>
-                <scope>provided</scope>
             </dependency>
+            <!-- Provided, non-bundled dependencies -->
             <dependency>
                 <groupId>com.atlassian.plugins</groupId>
                 <artifactId>atlassian-plugins-core</artifactId>
@@ -152,6 +151,12 @@
             <dependency>
                 <groupId>com.atlassian.plugins</groupId>
                 <artifactId>atlassian-plugins-webresource</artifactId>
+                <version>${atlassian.plugins.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-webfragment</artifactId>
                 <version>${atlassian.plugins.version}</version>
                 <scope>provided</scope>
             </dependency>
@@ -222,7 +227,7 @@
 
     <properties>
         <jdkLevel>1.5</jdkLevel>
-        <atlassian.plugins.version>2.2.0</atlassian.plugins.version>
+        <atlassian.plugins.version>2.5.0-SNAPSHOT</atlassian.plugins.version>
         <sal.version>2.0.0</sal.version>
         <!-- Work around for FELIX-1439 -->
         <project.organization.name>${project.organization.name}</project.organization.name>

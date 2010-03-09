@@ -27,4 +27,5 @@
         <interface>com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRendererFactory</interface>
     </component>
 
+    <web-panel-renderer key="velocity-1.5-web-panel-renderer" class="com.atlassian.templaterenderer.velocity.one.five.VelocityWebPanelRenderer" public="true"/>
 </atlassian-plugin>

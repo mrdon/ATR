@@ -26,5 +26,7 @@
         <interface>com.atlassian.templaterenderer.TemplateRendererFactory</interface>
         <interface>com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRendererFactory</interface>
     </component>
-    
+
+    <web-panel-renderer key="velocity-1.6-web-panel-renderer" class="com.atlassian.templaterenderer.velocity.one.six.VelocityWebPanelRenderer" public="true"/>
+
 </atlassian-plugin>

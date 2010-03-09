@@ -17,7 +17,6 @@ import com.atlassian.templaterenderer.RenderingException;
 import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
 import com.atlassian.templaterenderer.velocity.TemplateRendererAnnotationBoxingUberspect;
-import com.atlassian.templaterenderer.velocity.TemplateRendererHtmlAnnotationEscaper;
 import com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer;
 import com.atlassian.velocity.htmlsafe.HtmlAnnotationEscaper;
 import com.atlassian.velocity.htmlsafe.HtmlSafeDirective;
@@ -33,7 +32,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
 
     private final VelocityEngine velocity;
 
-    public VelocityTemplateRendererImpl(ClassLoader classLoader, 
+    public VelocityTemplateRendererImpl(ClassLoader classLoader,
             String pluginKey,
             Map<String, String> properties,
             TemplateContextFactory templateContextFactory)

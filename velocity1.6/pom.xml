@@ -12,9 +12,10 @@
         <atlassian.plugin.key>com.atlassian.templaterenderer.atlassian-template-renderer-velocity1.6-plugin</atlassian.plugin.key>
         <Export-Package>
             com.atlassian.templaterenderer.velocity.one.six;version="${project.version}",
-            org.apache.velocity.*;version="1.6.2"
+            org.apache.velocity.*;version="1.6.2",
+            com.atlassian.velocity.htmlsafe
         </Export-Package>
-        <Private-Package>com.atlassian.templaterenderer.velocity.*</Private-Package>
+        <Private-Package>com.atlassian.templaterenderer.velocity.*,com.atlassian.velocity.htmlsafe.*</Private-Package>
         <Import-Package>
             com.werken.xpath;version="[0.9.4, 1.0.0)";resolution:=optional,
             javax.servlet.*;version="[2.3.0, 3.0.0)";resolution:=optional,
@@ -26,6 +27,7 @@
             org.apache.oro.text.perl;version="[2.0.8, 3.0.0)";resolution:=optional,
             org.apache.tools.ant.*;version="[1.7.0, 2.0.0)";resolution:=optional,
             org.jdom.*;version="[1.0.0, 2.0.0)";resolution:=optional,
+            com.atlassian.plugin.web.renderer,
             *
         </Import-Package>
         <Spring-Context>*;timeout:=60</Spring-Context>
@@ -63,11 +65,11 @@
             <artifactId>atlassian-template-renderer-velocity-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- Provided, non-bundled dependencies -->
         <dependency>
             <groupId>com.atlassian.velocity.htmlsafe</groupId>
             <artifactId>velocity-htmlsafe</artifactId>
         </dependency>
+        <!-- Provided, non-bundled dependencies -->
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.osgi.core</artifactId>
@@ -83,6 +85,10 @@
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
             <artifactId>atlassian-plugins-osgi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-webfragment</artifactId>
         </dependency>
         <dependency>
             <groupId>com.atlassian.bundles</groupId>
