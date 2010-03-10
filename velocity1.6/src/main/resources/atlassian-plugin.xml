@@ -6,7 +6,7 @@
     </plugin-info>
 
     <component-import key="templateContextFactory" interface="com.atlassian.templaterenderer.TemplateContextFactory"/>
-    
+
     <component key="velocity-1.6-template-renderer"
             class="com.atlassian.templaterenderer.velocity.one.six.internal.VelocityTemplateRendererServiceFactory"
             public="true">
@@ -27,6 +27,7 @@
         <interface>com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRendererFactory</interface>
     </component>
 
-    <web-panel-renderer key="velocity-1.6-web-panel-renderer" class="com.atlassian.templaterenderer.velocity.one.six.VelocityWebPanelRenderer" public="true"/>
+    <web-panel-renderer key="velocity-1.6-web-panel-renderer"
+                        class="com.atlassian.templaterenderer.velocity.one.six.VelocityWebPanelRenderer" public="true"/>
 
 </atlassian-plugin>
