@@ -12,13 +12,13 @@
         <atlassian.plugin.key>com.atlassian.templaterenderer.atlassian-template-renderer-velocity1.5-plugin</atlassian.plugin.key>
         <Export-Package>
             com.atlassian.templaterenderer.velocity.one.five;version="${project.version}",
-            org.apache.velocity.*;version=1.5,
-            com.atlassian.velocity.htmlsafe
+            org.apache.velocity.*;version="1.5",
+            com.atlassian.velocity.htmlsafe;version="1.1.beta1"
         </Export-Package>
         <Private-Package>com.atlassian.templaterenderer.velocity.*,com.atlassian.velocity.htmlsafe.*</Private-Package>
         <Import-Package>
             com.werken.xpath;version="[0.9.4, 1.0.0)";resolution:=optional,
-            javax.servlet.*;version="[2.5.0, 3.0.0)";resolution:=optional, 
+            javax.servlet.*;version="[2.5.0, 3.0.0)";resolution:=optional,
             org.apache.commons.collections.*;version="[3.2.0, 4.0.0)",
             org.apache.commons.lang.*;version="[2.1.0, 3.0.0)",
             org.apache.log.*;version="[1.0.1, 1.0.1]";resolution:=optional,
@@ -26,7 +26,7 @@
             org.apache.oro.text.perl;version="[2.0.8, 3.0.0)";resolution:=optional,
             org.apache.tools.ant.*;version="[1.7.0, 2.0.0)";resolution:=optional,
             org.jdom.*;version="[1.0.0, 2.0.0)",
-            com.atlassian.plugin.web.renderer,
+            com.atlassian.plugin.web.renderer;version="2.5.0",
             *
         </Import-Package>
         <Spring-Context>*;timeout:=60</Spring-Context>
@@ -74,7 +74,7 @@
             <artifactId>org.osgi.core</artifactId>
             <version>1.2.0</version>
             <scope>provided</scope>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>atlassian-template-renderer-api</artifactId>

@@ -1,5 +1,6 @@
 package com.atlassian.templaterenderer.velocity.one.six;
 
+import com.atlassian.plugin.Plugin;
 import com.atlassian.templaterenderer.AbstractVelocityWebPanelRenderer;
 import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.TemplateRenderer;
@@ -17,8 +18,9 @@ public class VelocityWebPanelRenderer extends AbstractVelocityWebPanelRenderer
     }
 
     @Override
-    protected TemplateRenderer getRenderer(ClassLoader classLoader) {
-        // TODO: this is relatively expensive, so cache somehow per classloader
-        return new VelocityTemplateRendererImpl(classLoader, "", Collections.<String, String>emptyMap(), templateContextFactory);
+    protected TemplateRenderer createRenderer(Plugin plugin)
+    {
+        return new VelocityTemplateRendererImpl(plugin.getClassLoader(), plugin.getKey(),
+                Collections.<String, String>emptyMap(), templateContextFactory);
     }
 }
