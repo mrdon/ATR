@@ -8,6 +8,9 @@ import com.atlassian.templaterenderer.velocity.one.six.internal.VelocityTemplate
 
 import java.util.Collections;
 
+/**
+ * @since   2.5.0
+ */
 public class VelocityWebPanelRenderer extends AbstractVelocityWebPanelRenderer
 {
     private final TemplateContextFactory templateContextFactory;
