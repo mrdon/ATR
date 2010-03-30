@@ -239,7 +239,7 @@
     </dependencies>
 
     <properties>
-        <atlassian.refapp.version>2.5.0-SNAPSHOT</atlassian.refapp.version>
+
         <http.port>8080</http.port>
         <rmi.port>8580</rmi.port>
         <debugger.port>5005</debugger.port>
