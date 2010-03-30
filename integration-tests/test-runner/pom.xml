@@ -190,7 +190,7 @@
         </dependency>
         <dependency>
             <groupId>com.atlassian.templaterenderer</groupId>
-            <artifactId>atlassian-template-renderer-velocity1.5-plugin</artifactId>
+            <artifactId>atlassian-template-renderer-velocity15-plugin</artifactId>
             <version>${project.version}</version>
             <type>bundle</type>
             <scope>provided</scope>
@@ -204,7 +204,7 @@
         </dependency>
         <dependency>
             <groupId>com.atlassian.templaterenderer</groupId>
-            <artifactId>atlassian-template-renderer-velocity1.6-plugin</artifactId>
+            <artifactId>atlassian-template-renderer-velocity16-plugin</artifactId>
             <version>${project.version}</version>
             <type>bundle</type>
             <scope>provided</scope>
