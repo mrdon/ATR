@@ -101,5 +101,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>atlassian-template-renderer-velocity-tests</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

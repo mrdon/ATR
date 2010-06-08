@@ -17,8 +17,8 @@ import com.atlassian.templaterenderer.RenderingException;
 import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
 import com.atlassian.templaterenderer.velocity.TemplateRendererAnnotationBoxingUberspect;
+import com.atlassian.templaterenderer.velocity.TemplateRendererHtmlAnnotationEscaper;
 import com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer;
-import com.atlassian.velocity.htmlsafe.HtmlAnnotationEscaper;
 import com.atlassian.velocity.htmlsafe.HtmlSafeDirective;
 
 /**
@@ -47,7 +47,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         velocity.addProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocity.addProperty("runtime.introspector.uberspect", TemplateRendererAnnotationBoxingUberspect.class.getName());
         velocity.addProperty("userdirective", HtmlSafeDirective.class.getName());
-        velocity.addProperty("eventhandler.referenceinsertion.class", HtmlAnnotationEscaper.class.getName());
+        velocity.addProperty("eventhandler.referenceinsertion.class", TemplateRendererHtmlAnnotationEscaper.class.getName());
         for (Map.Entry<String, String> prop : properties.entrySet())
         {
             velocity.addProperty(prop.getKey(), prop.getValue());
