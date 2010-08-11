@@ -68,7 +68,7 @@
         <dependency>
             <groupId>com.atlassian.bundles</groupId>
             <artifactId>velocity</artifactId>
-            <version>1.6.2-1-SNAPSHOT</version>
+            <version>1.6.2-1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
