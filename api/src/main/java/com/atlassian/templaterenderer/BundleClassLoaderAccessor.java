@@ -35,6 +35,8 @@ public class BundleClassLoaderAccessor
 
         public BundleClassLoader(final Bundle bundle, AlternativeResourceLoader altResourceLoader)
         {
+            // ATR-27: Ensure the parent ClassLoader is null so we don't leak classes from main ClassLoader
+            super(null);
             Validate.notNull(bundle, "The bundle must not be null");
             if (altResourceLoader == null)
             {
