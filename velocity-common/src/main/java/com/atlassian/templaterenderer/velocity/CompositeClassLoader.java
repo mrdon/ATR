@@ -28,7 +28,8 @@ public class CompositeClassLoader extends ClassLoader
      */
     public CompositeClassLoader(final ClassLoader... classLoaders)
     {
-        super();
+        // ATR-27: Ensure the parent ClassLoader is null so we don't leak classes from main ClassLoader
+        super(null);
         if (classLoaders == null || classLoaders.length == 0)
         {
             throw new IllegalArgumentException("At least one classLoader must be supplied!");
