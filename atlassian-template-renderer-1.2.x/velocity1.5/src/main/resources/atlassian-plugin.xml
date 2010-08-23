@@ -1,0 +1,32 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" pluginsVersion="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    </plugin-info>
+
+    <component-import key="templateContextFactory" interface="com.atlassian.templaterenderer.TemplateContextFactory"/>
+
+    <component key="velocity-1.5-template-renderer"
+            class="com.atlassian.templaterenderer.velocity.one.five.internal.VelocityTemplateRendererServiceFactory"
+            public="true">
+        <service-properties>
+            <entry key="engine" value="velocity-1.5" />
+        </service-properties>
+        <interface>com.atlassian.templaterenderer.TemplateRenderer</interface>
+        <interface>com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRenderer</interface>
+    </component>
+
+    <component key="velocity-1.5-template-renderer-factory"
+            class="com.atlassian.templaterenderer.velocity.one.five.internal.VelocityTemplateRendererFactoryServiceFactory"
+            public="true">
+        <service-properties>
+            <entry key="engine" value="velocity-1.5" />
+        </service-properties>
+        <interface>com.atlassian.templaterenderer.TemplateRendererFactory</interface>
+        <interface>com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRendererFactory</interface>
+    </component>
+
+    <web-panel-renderer key="velocity-1.5-web-panel-renderer"
+                        class="com.atlassian.templaterenderer.velocity.one.five.VelocityWebPanelRenderer" public="true"/>
+</atlassian-plugin>
