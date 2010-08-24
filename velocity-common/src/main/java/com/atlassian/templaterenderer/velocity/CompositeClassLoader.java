@@ -13,6 +13,9 @@ import java.io.InputStream;
 /**
  * A CompositeClassLoader that will try to load classes/resources using multiple classloaders.  It will try to load
  * using the order in which classloaders where supplied and will return the first match.
+ * <p>
+ * The ClassLoader will have a null parent so we don't leak classes from main ClassLoader. 
+ * See https://studio.atlassian.com/browse/ATR-27
  */
 public class CompositeClassLoader extends ClassLoader
 {

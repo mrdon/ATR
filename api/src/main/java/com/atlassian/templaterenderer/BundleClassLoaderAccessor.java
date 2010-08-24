@@ -16,6 +16,9 @@ import java.io.IOException;
  * Utility methods for accessing a bundle as if it was a classloader.  Copied from atlassian-plugins-osgi, as
  * this class is package private there.  If we are ever given access (currently not) to the class loader that comes
  * from the OsgiPluginHelper, this can probably be got rid of.
+ * <p>
+ * The returned ClassLoader will have a null parent so we don't leak classes from main ClassLoader.
+ * See https://studio.atlassian.com/browse/ATR-27
  */
 public class BundleClassLoaderAccessor
 {
