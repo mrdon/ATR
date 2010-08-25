@@ -42,6 +42,12 @@
                                 <goal>deploy-maven-one-repository</goal>
                             </goals>
                         </execution>
+                        <execution>
+                            <id>m1-install</id>
+                            <goals>
+                                <goal>install-maven-one-repository</goal>
+                            </goals>
+                        </execution>
                     </executions>
                 </plugin>
                 <plugin>
