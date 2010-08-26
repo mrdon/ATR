@@ -245,8 +245,8 @@
     </properties>
 
   <scm>
-    <connection>scm:svn:https://studio.atlassian.com/svn/ATR/tags/atlassian-template-renderer-1.2.0</connection>
-    <developerConnection>scm:svn:https://studio.atlassian.com/svn/ATR/tags/atlassian-template-renderer-1.2.0</developerConnection>
-    <url>https://studio.atlassian.com/source/browse/ATR/tags/atlassian-template-renderer-1.2.0</url>
+    <connection>scm:svn:https://studio.atlassian.com/svn/ATR/branches/atlassian-template-renderer-1.2.x</connection>
+    <developerConnection>scm:svn:https://studio.atlassian.com/svn/ATR/branches/atlassian-template-renderer-1.2.x</developerConnection>
+    <url>https://studio.atlassian.com/source/browse/ATR/branches/atlassian-template-renderer-1.2.x</url>
   </scm>
 </project>
