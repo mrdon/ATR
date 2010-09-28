@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.atlassian.templaterenderer</groupId>
     <artifactId>atlassian-template-renderer</artifactId>
-    <version>1.2.3</version>
+    <version>1.2.4-SNAPSHOT</version>
     <name>Atlassian Template Renderer</name>
     <description>API and plugins for easily rendering content from different template engines.</description>
     <packaging>pom</packaging>
@@ -245,8 +245,8 @@
     </properties>
 
   <scm>
-    <connection>scm:svn:https://studio.atlassian.com/svn/ATR/tags/atlassian-template-renderer-1.2.3</connection>
-    <developerConnection>scm:svn:https://studio.atlassian.com/svn/ATR/tags/atlassian-template-renderer-1.2.3</developerConnection>
-    <url>https://studio.atlassian.com/source/browse/ATR/tags/atlassian-template-renderer-1.2.3</url>
+    <connection>scm:svn:https://studio.atlassian.com/svn/ATR/branches/atlassian-template-renderer-1.2.x</connection>
+    <developerConnection>scm:svn:https://studio.atlassian.com/svn/ATR/branches/atlassian-template-renderer-1.2.x</developerConnection>
+    <url>https://studio.atlassian.com/source/browse/ATR/branches/atlassian-template-renderer-1.2.x</url>
   </scm>
 </project>
