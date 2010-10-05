@@ -7,57 +7,58 @@
     </parent>
     <artifactId>atlassian-template-renderer-velocity16-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.6 Plugin</name>
-    <packaging>bundle</packaging>
-    <properties>
-        <atlassian.plugin.key>com.atlassian.templaterenderer.atlassian-template-renderer-velocity1.6-plugin</atlassian.plugin.key>
-        <Export-Package>
-            com.atlassian.templaterenderer.velocity.one.six;version="${project.version}",
-            com.atlassian.velocity.htmlsafe;version="1.1.beta1"
-        </Export-Package>
-        <Private-Package>com.atlassian.templaterenderer.velocity.*,com.atlassian.velocity.htmlsafe.*</Private-Package>
-        <Import-Package>
-            com.werken.xpath;version="[0.9.4, 1.0.0)";resolution:=optional,
-            javax.servlet.*;version="[2.3.0, 3.0.0)";resolution:=optional,
-            org.apache.commons.collections.*;version="[3.2.0, 4.0.0)",
-            org.apache.commons.lang.*;version="[2.4.0, 3.0.0)",
-            org.apache.commons.logging.*;version="[1.1.0, 2.0.0)";resolution:=optional,
-            org.apache.log.*;version="[1.0.1, 1.0.1]";resolution:=optional,
-            org.apache.log4j;version="[1.2.12, 2.0.0)";resolution:=optional,
-            org.apache.oro.text.perl;version="[2.0.8, 3.0.0)";resolution:=optional,
-            org.apache.tools.ant.*;version="[1.7.0, 2.0.0)";resolution:=optional,
-            org.apache.velocity.*;version="[1.6,1.7)",
-            org.jdom.*;version="[1.0.0, 2.0.0)";resolution:=optional,
-            com.atlassian.plugin.web.renderer;version="2.5.0",
-            *
-        </Import-Package>
-        <Spring-Context>*;timeout:=60</Spring-Context>
-    </properties>
+    <packaging>atlassian-plugin</packaging>
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-one-plugin</artifactId>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-refapp-plugin</artifactId>
+                <version>${amps.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <extractDependencies>true</extractDependencies>
+                    <productVersion>${refapp.version}</productVersion>
+                    <instructions>
+                        <Spring-Context>
+                            *;timeout:=60
+                        </Spring-Context>
+                        <Export-Package>
+                            com.atlassian.templaterenderer.velocity.one.six;version="${project.version}",
+                            com.atlassian.velocity.htmlsafe;version="1.1.beta1"
+                        </Export-Package>
+                        <Import-Package>
+                            com.werken.xpath;version="[0.9.4, 1.0.0)";resolution:=optional,
+                            javax.servlet.*;version="[2.3.0, 3.0.0)";resolution:=optional,
+                            org.apache.commons.collections.*;version="[3.2.0, 4.0.0)",
+                            org.apache.commons.lang.*;version="[2.4.0, 3.0.0)",
+                            org.apache.commons.logging.*;version="[1.1.0, 2.0.0)";resolution:=optional,
+                            org.apache.log.*;version="[1.0.1, 1.0.1]";resolution:=optional,
+                            org.apache.log4j;version="[1.2.12, 2.0.0)";resolution:=optional,
+                            org.apache.oro.text.perl;version="[2.0.8, 3.0.0)";resolution:=optional,
+                            org.apache.tools.ant.*;version="[1.7.0, 2.0.0)";resolution:=optional,
+                            org.apache.velocity.*;version="[1.6,1.7)",
+                            org.jdom.*;version="[1.0.0, 2.0.0)";resolution:=optional,
+                            com.atlassian.plugin.web.renderer;version="2.5.0",
+                            *;resolution:=optional
+                        </Import-Package>
+                        <Private-Package>com.atlassian.templaterenderer.velocity.*,com.atlassian.velocity.htmlsafe.*</Private-Package>
+                    </instructions>
+
+                   <pluginArtifacts>
+                        <pluginArtifact>
+                            <groupId>com.atlassian.templaterenderer</groupId>
+                            <artifactId>atlassian-template-renderer-api</artifactId>
+                            <version>${project.version}</version>
+                        </pluginArtifact>
+                       <pluginArtifact>
+                            <groupId>com.atlassian.bundles</groupId>
+                            <artifactId>velocity</artifactId>
+                            <version>1.6.2-1</version>
+                        </pluginArtifact>
+                    </pluginArtifacts>
+                </configuration>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>atlassian-plugin.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-                <excludes>
-                    <exclude>atlassian-plugin.xml</exclude>
-                </excludes>
-            </resource>
-        </resources>
     </build>
     <dependencies>
         <!-- Compile-time, bundled dependencies -->
@@ -65,10 +66,26 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>atlassian-template-renderer-velocity-common</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.velocity</groupId>
+                    <artifactId>velocity</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.atlassian.velocity.htmlsafe</groupId>
             <artifactId>velocity-htmlsafe</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.velocity</groupId>
+                    <artifactId>velocity</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- Provided, non-bundled dependencies -->
         <dependency>
@@ -90,20 +107,30 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.atlassian.plugins</groupId>
             <artifactId>atlassian-plugins-osgi</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
             <artifactId>atlassian-plugins-webfragment</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.bundles</groupId>
             <artifactId>google-collections</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

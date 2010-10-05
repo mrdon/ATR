@@ -237,6 +237,7 @@
         <refapp.version>2.5.0.beta1</refapp.version>
         <plug.version>2.5.0.beta2</plug.version>
         <sal.version>2.0.0</sal.version>
+        <amps.version>3.2.2</amps.version>
         <!-- Work around for FELIX-1439 -->
         <project.organization.name>${project.organization.name}</project.organization.name>
         <project.organization.url>${project.organization.url}</project.organization.url>
