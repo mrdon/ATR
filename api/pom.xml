@@ -68,4 +68,8 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <properties>
+        <atlassian.plugin.key>com.atlassian.templaterenderer.api</atlassian.plugin.key>
+    </properties>
 </project>

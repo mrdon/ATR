@@ -8,6 +8,11 @@
     <artifactId>atlassian-template-renderer-velocity16-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.6 Plugin</name>
     <packaging>atlassian-plugin</packaging>
+
+    <properties>
+           <atlassian.plugin.key>com.atlassian.templaterenderer.atlassian-template-renderer-velocity1.6-plugin</atlassian.plugin.key>
+    </properties>
+
     <build>
         <plugins>
             <plugin>

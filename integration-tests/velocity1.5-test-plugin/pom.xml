@@ -7,40 +7,39 @@
     </parent>
     <artifactId>atlassian-template-renderer-velocity1.5-test-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.5 Test Plugin</name>
-    <packaging>bundle</packaging>
+    <packaging>atlassian-plugin</packaging>
+
     <properties>
         <atlassian.plugin.key>com.atlassian.templaterenderer.velocity1.5.test</atlassian.plugin.key>
-        <Export-Package />
-        <Private-Package>com.atlassian.templaterenderer.velocity.*</Private-Package>
-        <Spring-Context>*;timeout:=60</Spring-Context>
     </properties>
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>atlassian-plugin.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-                <excludes>
-                    <exclude>atlassian-plugin.xml</exclude>
-                </excludes>
-            </resource>
-        </resources>
+
+   <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-amps-plugin</artifactId>
+                <version>${amps.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <productVersion>${refapp.version}</productVersion>
+                    <instructions>
+                        <Spring-Context>
+                            *;timeout:=60
+                        </Spring-Context>
+                        <Export-Package/>
+                        <Private-Package>com.atlassian.templaterenderer.velocity.*</Private-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
-        <!-- Provided, non-bundled dependencies -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>atlassian-template-renderer-api</artifactId>

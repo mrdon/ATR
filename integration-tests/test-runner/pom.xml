@@ -40,6 +40,7 @@
                         </pluginArtifact>
                         -->
 
+                        <!-- For velocity 1.6 -->
                         <pluginArtifact>
                             <groupId>com.atlassian.templaterenderer</groupId>
                             <artifactId>atlassian-template-renderer-velocity16-plugin</artifactId>
@@ -55,6 +56,7 @@
                             <artifactId>velocity</artifactId>
                             <version>1.6.2-1</version>
                         </pluginArtifact>
+
                     </pluginArtifacts>
 
                 </configuration>
