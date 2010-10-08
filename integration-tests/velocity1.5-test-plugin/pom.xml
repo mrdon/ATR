@@ -17,7 +17,7 @@
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-amps-plugin</artifactId>
+                <artifactId>maven-refapp-plugin</artifactId>
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
@@ -29,6 +29,26 @@
                         <Export-Package/>
                         <Private-Package>com.atlassian.templaterenderer.velocity.*</Private-Package>
                     </instructions>
+                    <pluginArtifacts>
+                        <pluginArtifact>
+                            <groupId>com.atlassian.templaterenderer</groupId>
+                            <artifactId>atlassian-template-renderer-api</artifactId>
+                            <version>${project.version}</version>
+                        </pluginArtifact>
+                        <pluginArtifact>
+                            <groupId>com.atlassian.templaterenderer</groupId>
+                            <artifactId>atlassian-template-renderer-velocity15-plugin</artifactId>
+                            <version>${project.version}</version>
+                        </pluginArtifact>
+                    </pluginArtifacts>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>it/**/*</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
@@ -39,12 +59,18 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <scope>provided</scope>
-        </dependency>
+        </dependency>        
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>atlassian-template-renderer-api</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.templaterenderer</groupId>
+            <artifactId>atlassian-template-renderer-test-runner</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

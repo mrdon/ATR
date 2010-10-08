@@ -8,61 +8,7 @@
     </parent>
     <artifactId>atlassian-template-renderer-test-runner</artifactId>
     <name>Atlassian Template Renderer Test Runner</name>
-    <packaging>atlassian-plugin</packaging>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-refapp-plugin</artifactId>
-                <version>${amps.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <productVersion>${refapp.version}</productVersion>
-                    <pluginArtifacts>
-                        <pluginArtifact>
-                            <groupId>com.atlassian.templaterenderer</groupId>
-                            <artifactId>atlassian-template-renderer-api</artifactId>
-                            <version>${project.version}</version>
-                        </pluginArtifact>
-
-                        <!-- For velocity 1.5 -->
-                        <!--
-                        <pluginArtifact>
-                            <groupId>com.atlassian.templaterenderer</groupId>
-                            <artifactId>atlassian-template-renderer-velocity15-plugin</artifactId>
-                            <version>${project.version}</version>
-                        </pluginArtifact>
-                        <pluginArtifact>
-                            <groupId>com.atlassian.templaterenderer</groupId>
-                            <artifactId>atlassian-template-renderer-velocity1.5-test-plugin</artifactId>
-                            <version>${project.version}</version>
-                        </pluginArtifact>
-                        -->
-
-                        <!-- For velocity 1.6 -->
-                        <pluginArtifact>
-                            <groupId>com.atlassian.templaterenderer</groupId>
-                            <artifactId>atlassian-template-renderer-velocity16-plugin</artifactId>
-                            <version>${project.version}</version>
-                        </pluginArtifact>
-                        <pluginArtifact>
-                            <groupId>com.atlassian.templaterenderer</groupId>
-                            <artifactId>atlassian-template-renderer-velocity1.6-test-plugin</artifactId>
-                            <version>${project.version}</version>
-                        </pluginArtifact>
-                        <pluginArtifact>
-                            <groupId>com.atlassian.bundles</groupId>
-                            <artifactId>velocity</artifactId>
-                            <version>1.6.2-1</version>
-                        </pluginArtifact>
-
-                    </pluginArtifacts>
-
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <packaging>jar</packaging>
 
     <dependencies>
         <!-- Testing -->
@@ -83,6 +29,16 @@
             <artifactId>xalan</artifactId>
             <version>2.7.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
