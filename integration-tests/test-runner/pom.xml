@@ -59,6 +59,85 @@
 
                     </pluginArtifacts>
 
+                    <products>
+                        <product>
+                            <id>jira</id>
+                            <version>${jira.version}</version>
+                            <productDataVersion>4.1.1-upm2</productDataVersion>
+                            <output>${project.build.directory}/jira-${jira.version}.log</output>
+                        </product>
+                        <product>
+                            <id>confluence</id>
+                            <version>${confluence.version}</version>
+                            <productDataVersion>3.1-UPM</productDataVersion>
+                            <output>${project.build.directory}/confluence-${confluence.version}.log</output>
+                        </product>
+                        <product>
+                            <id>refapp</id>
+                            <version>${refapp.version}</version>
+                            <output>${project.build.directory}/refapp-${refapp.version}.log</output>
+                        </product>
+                        <product>
+                            <id>bamboo</id>
+                            <version>${bamboo.version}</version>
+                            <productDataVersion>2.2</productDataVersion>
+                            <output>${project.build.directory}/bamboo-${bamboo.version}.log</output>
+                        </product>
+                        <product>
+                            <id>fecru</id>
+                            <version>${fecru.version}</version>
+                            <output>${project.build.directory}/fecru-${fecru.version}.log</output>
+                        </product>
+                    </products>
+
+                    <testGroups>
+                        <testGroup>
+                            <id>refapp</id>
+                            <productIds>
+                                <productId>refapp</productId>
+                            </productIds>
+                            <includes>
+                                <include>it/**</include>
+                            </includes>
+                        </testGroup>
+                        <testGroup>
+                            <id>jira</id>
+                            <productIds>
+                                <productId>jira</productId>
+                            </productIds>
+                            <includes>
+                                <include>it/**</include>
+                            </includes>
+                        </testGroup>
+                        <testGroup>
+                            <id>confluence</id>
+                            <productIds>
+                                <productId>confluence</productId>
+                            </productIds>
+                            <includes>
+                                <include>it/**</include>
+                            </includes>
+                        </testGroup>
+                        <testGroup>
+                            <id>fecru</id>
+                            <productIds>
+                                <productId>fecru</productId>
+                            </productIds>
+                            <includes>
+                                <include>it/**</include>
+                            </includes>
+                        </testGroup>
+                        <testGroup>
+                            <id>bamboo</id>
+                            <productIds>
+                                <productId>bamboo</productId>
+                            </productIds>
+                            <includes>
+                                <include>it/**</include>
+                            </includes>
+                        </testGroup>
+                    </testGroups>
+
                 </configuration>
             </plugin>
         </plugins>
@@ -83,6 +162,20 @@
             <artifactId>xalan</artifactId>
             <version>2.7.0</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- just to make sure this project gets built after the test plugins -->
+        <dependency>
+            <groupId>com.atlassian.templaterenderer</groupId>
+            <artifactId>atlassian-template-renderer-velocity1.5-test-plugin</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.templaterenderer</groupId>
+            <artifactId>atlassian-template-renderer-velocity1.6-test-plugin</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
