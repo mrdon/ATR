@@ -6,13 +6,6 @@ import java.io.Writer;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.runtime.log.CommonsLogLogChute;
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
-
 import com.atlassian.templaterenderer.RenderingException;
 import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
@@ -20,6 +13,13 @@ import com.atlassian.templaterenderer.velocity.TemplateRendererAnnotationBoxingU
 import com.atlassian.templaterenderer.velocity.TemplateRendererHtmlAnnotationEscaper;
 import com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer;
 import com.atlassian.velocity.htmlsafe.HtmlSafeDirective;
+
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.log.CommonsLogLogChute;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 /**
  * A velocity template renderer
@@ -45,6 +45,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         velocity.addProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogLogChute.class.getName());
         velocity.addProperty(Velocity.RESOURCE_LOADER, "classpath");
         velocity.addProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        velocity.addProperty("classpath.resource.loader.cache", Boolean.toString(!Boolean.getBoolean("atlassian.dev.mode")));
         velocity.addProperty("runtime.introspector.uberspect", TemplateRendererAnnotationBoxingUberspect.class.getName());
         velocity.addProperty("userdirective", HtmlSafeDirective.class.getName());
         velocity.addProperty("eventhandler.referenceinsertion.class", TemplateRendererHtmlAnnotationEscaper.class.getName());
@@ -54,7 +55,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         }
 
         final ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
-        // Don't use the context class loader here since it is a OSGIBundleDelegatingClassLoader that actually uses the originating 
+        // Don't use the context class loader here since it is a OSGIBundleDelegatingClassLoader that actually uses the originating
         // bundle. Essentially the same as the classLoader passed in.  Using this.getClass.getClassLoader() uses *this* bundles
         // classloader meaning the right version (the version this bundle depends on) of velocity will be loaded.
         final CompositeClassLoader compositeClassLoader =

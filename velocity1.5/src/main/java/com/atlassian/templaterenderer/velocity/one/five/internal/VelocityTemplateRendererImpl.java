@@ -6,12 +6,6 @@ import java.io.Writer;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
-
 import com.atlassian.templaterenderer.RenderingException;
 import com.atlassian.templaterenderer.TemplateContextFactory;
 import com.atlassian.templaterenderer.velocity.CompositeClassLoader;
@@ -19,8 +13,13 @@ import com.atlassian.templaterenderer.velocity.TemplateRendererAnnotationBoxingU
 import com.atlassian.templaterenderer.velocity.TemplateRendererHtmlAnnotationEscaper;
 import com.atlassian.templaterenderer.velocity.log.CommonsLogChute;
 import com.atlassian.templaterenderer.velocity.one.five.VelocityTemplateRenderer;
-import com.atlassian.velocity.htmlsafe.HtmlAnnotationEscaper;
 import com.atlassian.velocity.htmlsafe.HtmlSafeDirective;
+
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
 {
@@ -40,6 +39,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         velocity.addProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogChute.class.getName());
         velocity.addProperty(Velocity.RESOURCE_LOADER, "classpath");
         velocity.addProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        velocity.addProperty("classpath.resource.loader.cache", Boolean.toString(!Boolean.getBoolean("atlassian.dev.mode")));
         velocity.addProperty("runtime.introspector.uberspect", TemplateRendererAnnotationBoxingUberspect.class.getName());
         velocity.addProperty("eventhandler.referenceinsertion.class", TemplateRendererHtmlAnnotationEscaper.class.getName());
         velocity.addProperty("userdirective", HtmlSafeDirective.class.getName());
@@ -47,7 +47,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         {
             velocity.addProperty(prop.getKey(), prop.getValue());
         }
-        
+
         final ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
         // Don't use the context class loader here since it is a OSGIBundleDelegatingClassLoader that actually uses the originating
         // bundle. Essentially the same as the classLoader passed in.  Using this.getClass.getClassLoader() uses *this* bundles
@@ -96,7 +96,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
             Thread.currentThread().setContextClassLoader(originalClassLoader);
         }
     }
-    
+
     public String renderFragment(String fragment, Map<String, Object> context)
     {
         try
@@ -111,7 +111,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         }
 
     }
-    
+
     private VelocityContext createContext(Map<String, Object> contextParams)
     {
         return new VelocityContext(templateContextFactory.createContext(pluginKey, contextParams));
