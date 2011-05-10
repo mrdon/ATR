@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.atlassian.templaterenderer</groupId>
         <artifactId>atlassian-template-renderer-integration-tests</artifactId>
-        <version>1.3.0-SNAPSHOT</version>
+        <version>1.3.0-alpha1</version>
     </parent>
     <artifactId>atlassian-template-renderer-velocity1.5-test-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.5 Test Plugin</name>
@@ -26,7 +26,7 @@
                         <Spring-Context>
                             *;timeout:=60
                         </Spring-Context>
-                        <Export-Package/>
+                        <Export-Package />
                         <Private-Package>com.atlassian.templaterenderer.velocity.*</Private-Package>
                     </instructions>
                 </configuration>
