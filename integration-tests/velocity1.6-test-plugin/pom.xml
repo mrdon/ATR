@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.atlassian.templaterenderer</groupId>
         <artifactId>atlassian-template-renderer-integration-tests</artifactId>
-        <version>1.3.0-SNAPSHOT</version>
+        <version>1.3.0-rc1</version>
     </parent>
     <artifactId>atlassian-template-renderer-velocity1.6-test-plugin</artifactId>
     <name>Atlassian Template Renderer Velocity 1.6 Test Plugin</name>
