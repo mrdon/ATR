@@ -176,7 +176,7 @@
             <dependency>
                 <groupId>com.atlassian.security.auth.trustedapps</groupId>
                 <artifactId>atlassian-trusted-apps-core</artifactId>
-                <version>1.0</version>
+                <version>2.5</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
@@ -234,10 +234,9 @@
 
     <properties>
         <jdkLevel>1.5</jdkLevel>
-        <refapp.version>2.5.0.beta1</refapp.version>
-        <plug.version>2.5.0.beta2</plug.version>
-        <sal.version>2.0.0</sal.version>
-        <amps.version>3.3-m7</amps.version>
+        <plug.version>2.8.0</plug.version>
+        <sal.version>2.6.0</sal.version>
+        <amps.version>3.3.1</amps.version>
 
         <!-- Work around for FELIX-1439 -->
         <project.organization.name>${project.organization.name}</project.organization.name>
@@ -245,7 +244,7 @@
         <pom.organization.name>${pom.organization.name}</pom.organization.name>
         <pom.organization.url>${pom.organization.url}</pom.organization.url>
 
-        <refapp.version>2.8.0</refapp.version>
+        <refapp.version>2.11.0-rc1</refapp.version>
         <confluence.version>3.4-beta1</confluence.version>
         <jira.version>4.2.0-upm-SNAPSHOT</jira.version>
         <bamboo.version>3.0-m2</bamboo.version>
