@@ -12,9 +12,9 @@
         <atlassian.plugin.key>com.atlassian.templaterenderer.atlassian-template-renderer-velocity1.6-plugin</atlassian.plugin.key>
         <Export-Package>
             com.atlassian.templaterenderer.velocity.one.six;version="${project.version}",
-            com.atlassian.velocity.htmlsafe;version="1.1.beta1"
+            com.atlassian.velocity.htmlsafe.*;version="1.1.beta1"
         </Export-Package>
-        <Private-Package>com.atlassian.templaterenderer.velocity.*,com.atlassian.velocity.htmlsafe.*</Private-Package>
+        <Private-Package>com.atlassian.templaterenderer.velocity.*</Private-Package>
         <Import-Package>
             com.werken.xpath;version="[0.9.4, 1.0.0)";resolution:=optional,
             javax.servlet.*;version="[2.3.0, 3.0.0)";resolution:=optional,
