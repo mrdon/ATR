@@ -41,7 +41,11 @@ public abstract class AbstractVelocityRendererImplTest
             }
         });
         
-        Map<String, String> initProperties = ImmutableMap.of();
+        // ATR-38:  To ensure that property overriding works correctly, pass this property
+        // that is also included in our defaults, which is only allowed to have a single value.
+        Map<String, String> initProperties = ImmutableMap.of(
+            "classpath.resource.loader.cache", "true");
+        
         renderer = createVelocityRenderer(contextFactory, getClass().getClassLoader(), "test", initProperties);
     }
 
@@ -73,7 +77,7 @@ public abstract class AbstractVelocityRendererImplTest
             is(equalTo("< This & that >"))
         );
     }
-
+    
     public final class AtrHtmlUnescaped
     {
         private final String string;
