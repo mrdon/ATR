@@ -121,7 +121,7 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
     {
     	// "userdirective" property can have multiple values; all other overrideable
     	// properties that we set at init time should have single values
-    	if (true || key.equals("userdirective"))
+    	if (key.equals("userdirective"))
     	{
     		velocity.addProperty(key, value);
     	}
