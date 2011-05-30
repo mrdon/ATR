@@ -36,16 +36,16 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         this.pluginKey = pluginKey;
 
         velocity = new VelocityEngine();
-        velocity.addProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogChute.class.getName());
-        velocity.addProperty(Velocity.RESOURCE_LOADER, "classpath");
-        velocity.addProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-        velocity.addProperty("classpath.resource.loader.cache", Boolean.toString(!Boolean.getBoolean("atlassian.dev.mode")));
-        velocity.addProperty("runtime.introspector.uberspect", TemplateRendererAnnotationBoxingUberspect.class.getName());
-        velocity.addProperty("eventhandler.referenceinsertion.class", TemplateRendererHtmlAnnotationEscaper.class.getName());
-        velocity.addProperty("userdirective", HtmlSafeDirective.class.getName());
+        overrideProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogChute.class.getName());
+        overrideProperty(Velocity.RESOURCE_LOADER, "classpath");
+        overrideProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        overrideProperty("classpath.resource.loader.cache", Boolean.toString(!Boolean.getBoolean("atlassian.dev.mode")));
+        overrideProperty("runtime.introspector.uberspect", TemplateRendererAnnotationBoxingUberspect.class.getName());
+        overrideProperty("eventhandler.referenceinsertion.class", TemplateRendererHtmlAnnotationEscaper.class.getName());
+        overrideProperty("userdirective", HtmlSafeDirective.class.getName());
         for (Map.Entry<String, String> prop : properties.entrySet())
         {
-            velocity.addProperty(prop.getKey(), prop.getValue());
+            overrideProperty(prop.getKey(), prop.getValue());
         }
 
         final ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
@@ -117,6 +117,20 @@ public class VelocityTemplateRendererImpl implements VelocityTemplateRenderer
         return new VelocityContext(templateContextFactory.createContext(pluginKey, contextParams));
     }
 
+    private void overrideProperty(String key, Object value)
+    {
+    	// "userdirective" property can have multiple values; all other overrideable
+    	// properties that we set at init time should have single values
+    	if (key.equals("userdirective"))
+    	{
+    		velocity.addProperty(key, value);
+    	}
+    	else
+    	{
+    		velocity.setProperty(key, value);
+    	}
+    }
+    
     /**
      * Check whether the given template exists or not
      */
